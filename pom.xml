@@ -41,6 +41,51 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
             </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.5</version>
+                <executions>
+                    <execution> <!-- id (придумываем сами) -->
+                        <id>prepare-agent</id>
+                        <phase>initialize</phase>
+                        <goals> <!-- какую цель выполняем (берём из справки) -->
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution> <!-- id (придумываем сами) -->
+                        <id>report</id>
+                        <goals> <!-- какую цель выполняем (берём из справки) -->
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution> <!-- id (придумываем сами) -->
+                        <id>check</id>
+                        <phase>verify</phase>
+                        <goals> <!-- какую цель выполняем (берём из справки) -->
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <rules>
+                        <rule>
+                            <limits>
+                                <limit>
+                                    <counter>BRANCH</counter>
+                                    <value>COVEREDRATIO</value>
+                                    <minimum>100%</minimum>
+                                </limit>
+                            </limits>
+                        </rule>
+                    </rules>
+                    <excludes>
+                        <exclude>ru/netology/domain/*.class </exclude>
+
+                    </excludes>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
